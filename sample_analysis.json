@@ -1,0 +1,30 @@
+{
+    "correct_samples": [
+        {
+            "index": 1030,
+            "true_value": 18.0,
+            "predicted_value": 17.934523361297124,
+            "error": 0.06547663870287579
+        },
+        {
+            "index": 1449,
+            "true_value": 120.0,
+            "predicted_value": 164.25815995937026,
+            "error": 44.25815995937026
+        }
+    ],
+    "incorrect_samples": [
+        {
+            "index": 1475,
+            "true_value": 480.0,
+            "predicted_value": 146.5720164888171,
+            "error": 333.4279835111829
+        },
+        {
+            "index": 1055,
+            "true_value": 400.0,
+            "predicted_value": 186.35591648211113,
+            "error": 213.64408351788887
+        }
+    ]
+}

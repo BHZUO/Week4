@@ -1,0 +1,140 @@
+[
+    {
+        "model_name": "LGBM",
+        "model_params": "{'boosting_type': 'gbdt', 'class_weight': None, 'colsample_bytree': 1.0, 'importance_type': 'split', 'learning_rate': 0.1, 'max_depth': -1, 'min_child_samples': 20, 'min_child_weight': 0.001, 'min_split_gain': 0.0, 'n_estimators': 100, 'n_jobs': None, 'num_leaves': 31, 'objective': None, 'random_state': 42, 'reg_alpha': 0.0, 'reg_lambda': 0.0, 'subsample': 1.0, 'subsample_for_bin': 200000, 'subsample_freq': 0}",
+        "fea_encoding": "target",
+        "0_fold_train_data": [
+            936,
+            10
+        ],
+        "0_fold_test_data": [
+            469,
+            10
+        ],
+        "0_fold_train_performance": {
+            "rmse": 19.21,
+            "mae": 9.47,
+            "r2": 0.95
+        },
+        "0_fold_test_performance": {
+            "rmse": 31.42,
+            "mae": 17.16,
+            "r2": 0.87
+        },
+        "1_fold_train_data": [
+            937,
+            10
+        ],
+        "1_fold_test_data": [
+            468,
+            10
+        ],
+        "1_fold_train_performance": {
+            "rmse": 18.06,
+            "mae": 9.37,
+            "r2": 0.96
+        },
+        "1_fold_test_performance": {
+            "rmse": 32.61,
+            "mae": 17.0,
+            "r2": 0.85
+        },
+        "2_fold_train_data": [
+            937,
+            10
+        ],
+        "2_fold_test_data": [
+            468,
+            10
+        ],
+        "2_fold_train_performance": {
+            "rmse": 18.38,
+            "mae": 9.55,
+            "r2": 0.95
+        },
+        "2_fold_test_performance": {
+            "rmse": 32.42,
+            "mae": 17.88,
+            "r2": 0.86
+        },
+        "average_train_performance": {
+            "rmse": 18.55,
+            "mae": 9.46,
+            "r2": 0.95
+        },
+        "average_test_performance": {
+            "rmse": 40.05,
+            "mae": 23.58,
+            "r2": 0.8
+        }
+    },
+    {
+        "model_name": "XGBoost",
+        "model_params": "{'objective': 'reg:squarederror', 'base_score': None, 'booster': None, 'callbacks': None, 'colsample_bylevel': None, 'colsample_bynode': None, 'colsample_bytree': None, 'device': None, 'early_stopping_rounds': None, 'enable_categorical': False, 'eval_metric': None, 'feature_types': None, 'gamma': None, 'grow_policy': None, 'importance_type': None, 'interaction_constraints': None, 'learning_rate': None, 'max_bin': None, 'max_cat_threshold': None, 'max_cat_to_onehot': None, 'max_delta_step': None, 'max_depth': None, 'max_leaves': None, 'min_child_weight': None, 'missing': nan, 'monotone_constraints': None, 'multi_strategy': None, 'n_estimators': None, 'n_jobs': None, 'num_parallel_tree': None, 'random_state': 42, 'reg_alpha': None, 'reg_lambda': None, 'sampling_method': None, 'scale_pos_weight': None, 'subsample': None, 'tree_method': None, 'validate_parameters': None, 'verbosity': None}",
+        "fea_encoding": "target",
+        "0_fold_train_data": [
+            936,
+            10
+        ],
+        "0_fold_test_data": [
+            469,
+            10
+        ],
+        "0_fold_train_performance": {
+            "rmse": 2.65,
+            "mae": 1.65,
+            "r2": 1.0
+        },
+        "0_fold_test_performance": {
+            "rmse": 30.74,
+            "mae": 14.99,
+            "r2": 0.87
+        },
+        "1_fold_train_data": [
+            937,
+            10
+        ],
+        "1_fold_test_data": [
+            468,
+            10
+        ],
+        "1_fold_train_performance": {
+            "rmse": 6.16,
+            "mae": 1.67,
+            "r2": 0.99
+        },
+        "1_fold_test_performance": {
+            "rmse": 32.31,
+            "mae": 14.42,
+            "r2": 0.85
+        },
+        "2_fold_train_data": [
+            937,
+            10
+        ],
+        "2_fold_test_data": [
+            468,
+            10
+        ],
+        "2_fold_train_performance": {
+            "rmse": 2.62,
+            "mae": 1.66,
+            "r2": 1.0
+        },
+        "2_fold_test_performance": {
+            "rmse": 33.66,
+            "mae": 15.71,
+            "r2": 0.85
+        },
+        "average_train_performance": {
+            "rmse": 3.81,
+            "mae": 1.66,
+            "r2": 1.0
+        },
+        "average_test_performance": {
+            "rmse": 44.47,
+            "mae": 28.16,
+            "r2": 0.75
+        }
+    }
+]
