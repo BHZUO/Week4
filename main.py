@@ -1,21 +1,16 @@
 import os
 from modules.data_loader import load_data, print_data_info
 from modules.preprocessor import (
-    add_date_features,
-    create_target_variable,
-    handle_categorical_columns,
-    apply_target_encoding,
-    prepare_features_and_target
+    add_date_features, create_target_variable, handle_categorical_columns,
+    apply_target_encoding, prepare_features_and_target
 )
 from modules.explorer import plot_price_distribution, plot_price_by_variety
-from modules.model_trainer import (
-    split_data,
-    evaluate_models,
-    train_best_model,
-    evaluate_model
-)
-from modules.model_interpreter import plot_feature_importance, explain_with_shap
+from modules.model_trainer import train_and_evaluate_models
+from modules.analyzer import analyze_predictions
 from modules.saver import setup_temp_dir, save_model_and_encoders, cleanup_temp_dir
+import joblib
+import json
+import lightgbm as lgb
 
 def main():
     print("1. 数据加载...")
@@ -41,35 +36,30 @@ def main():
     print("\n6. 准备特征和目标...")
     X, y = prepare_features_and_target(model_data, features, target)
 
-    print("\n7. 探索性数据分析...")
-    plot_price_distribution(model_data['Avg_Price'])
-    plot_price_by_variety(model_data)
+    print("\n7. 划分数据集...")
+    from sklearn.model_selection import train_test_split
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    print("\n8. 划分数据集...")
-    X_train, X_test, y_train, y_test = split_data(X, y)
+    print("\n8. 训练 LGBM 和 XGBoost 模型...")
+    results = train_and_evaluate_models(X_train, y_train, X_test, y_test)
 
-    print("\n9. 模型比较...")
-    evaluate_models(X_train, y_train)
+    print("\n9. 保存实验结果到 output/experiment_results.json")
+    os.makedirs("output", exist_ok=True)
+    with open('output/experiment_results.json', 'w') as f:
+        json.dump(results, f, indent=4)
 
-    print("\n10. 训练最佳模型...")
-    best_model, best_params = train_best_model(X_train, y_train)
-    print(f"\n最佳参数: {best_params}")
+    print("\n10. 样本分析...")
+    best_model = lgb.LGBMRegressor().fit(X_train, y_train)  # 可替换为实际最佳模型
+    predictions = best_model.predict(X_test)
+    analysis = analyze_predictions(X_test, y_test, predictions, df_original=df)
 
-    print("\n11. 模型评估...")
-    evaluate_model(best_model, X_test, y_test)
+    print("\n11. 保存样本分析到 output/sample_analysis.json")
+    with open('output/sample_analysis.json', 'w') as f:
+        json.dump(analysis, f, indent=4)
 
-    print("\n12. 特征重要性与模型解释...")
-    plot_feature_importance(best_model, features)
-    explain_with_shap(best_model, X_test, features)
-
-    print("\n13. 保存模型...")
-    save_model_and_encoders(best_model, encoders)
-
-    print("\n14. 清理临时文件夹...")
-    temp_dir = setup_temp_dir()
-    cleanup_temp_dir(temp_dir)
-
-    print("\n✅ 分析完成！结果已保存到当前目录。")
+    print("\n✅ 所有任务完成！")
+    print("实验结果已保存至 output/experiment_results.json")
+    print("样本分析已保存至 output/sample_analysis.json")
 
 if __name__ == '__main__':
     main()
